@@ -1,18 +1,21 @@
-import { validate, version } from 'uuid';
-import { InvalidUuidError } from './invalid-uuid-exception';
+import { v5 } from 'uuid';
+import { UuidInterface } from './uuid-interface';
 import { UuidV5Interface } from './uuid-v5-interface';
 
 export class UuidV5 implements UuidV5Interface {
-    id: string;
+    name: string;
+    namespace: UuidInterface;
 
-    constructor(id: string) {
-        if (!validate(id) || version(id) !== 5) {
-            throw new InvalidUuidError('invalid uuid v5 with "' + id + '"')
-        }
-        this.id = id
+    constructor(name: string, namespace: UuidInterface) {
+
+        this.namespace = namespace
+        this.name = name
     }
 
-    get string() {
-        return this.id
+    get string(): string {
+        return v5(
+            this.name,
+            this.namespace.string
+        )
     }
 }

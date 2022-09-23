@@ -1,14 +1,13 @@
-import { v5 } from 'uuid'
-import { UuidV4Interface } from './uuid-v4-interface'
+import { UuidInterface } from './uuid-interface'
 import { UuidV5 } from './uuid-v5'
 import { UuidV5Interface } from './uuid-v5-interface'
 
 export class PersonId {
     private classicPersonId: number
     private classicMandantId: number
-    private personNamespace: UuidV4Interface
+    private personNamespace: UuidInterface
 
-    constructor(classicPersonId: number, classicMandantId: number, personNamespace: UuidV4Interface) {
+    constructor(classicPersonId: number, classicMandantId: number, personNamespace: UuidInterface) {
 
         this.classicPersonId = classicPersonId
         this.classicMandantId = classicMandantId
@@ -17,10 +16,8 @@ export class PersonId {
 
     get uuidV5(): UuidV5Interface {
         return new UuidV5(
-            v5(
-                `${this.classicMandantId}${this.classicPersonId}`,
-                this.personNamespace.string
-            )
+            `${this.classicMandantId}${this.classicPersonId}`,
+            this.personNamespace
         )
     }
 }

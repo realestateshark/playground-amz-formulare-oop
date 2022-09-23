@@ -1,29 +1,15 @@
-import { InvalidUuidError } from './invalid-uuid-exception'
+import { Uuid } from './uuid'
 import { UuidV5 } from './uuid-v5'
 
 describe('uuidV5', () => {
     test('get uuidV5', () => {
+        const expectedUuidV5 = 'e72449b7-ac48-5e3b-ab17-61a9fc5ce5cc'
+        const uuidV4 = 'ddf10a1d-ff0b-4437-91f3-455a1246db54'
         const uuidV5 = new UuidV5(
-            '09d9783c-fb91-50b2-80dc-a23cd49a8da0'
+            'entity-id',
+            new Uuid(uuidV4)
         )
-
-        expect(uuidV5.string).toBe('09d9783c-fb91-50b2-80dc-a23cd49a8da0')
-    })
-
-    test('wrong uuid version', () => {
-
-        const uuidV1 = '4ff35b2e-3b4a-11ed-a0dd-fb47d549ea4a'
-        expect(() => {
-            return new UuidV5(uuidV1)
-        }).toThrowError(InvalidUuidError)
-    })
-
-    test('invaild uuid', () => {
-
-        expect(() => {
-            return new UuidV5(
-                'invaild uuid'
-            )
-        }).toThrowError(InvalidUuidError)
+        
+        expect(uuidV5.string).toBe(expectedUuidV5)
     })
 })
