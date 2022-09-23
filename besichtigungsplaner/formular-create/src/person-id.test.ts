@@ -1,5 +1,5 @@
-import { InvalidUuidError } from '../src/invalid-uuid-exception';
-import {  PersonId } from './../src/person-id'
+import { InvalidUuidError } from './invalid-uuid-exception'
+import { PersonId } from './person-id'
 
 describe('PersonId', () => {
     test('get uuidV5', () => {
