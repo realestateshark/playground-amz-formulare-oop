@@ -13,20 +13,20 @@ describe('PersonId', () => {
             personNamespaceUuid
         )
 
-        expect(personId.uuidV5).toBe('4ea989e9-9007-5fe9-831a-9e152c649173');
-    });
+        expect(personId.uuidV5).toBe('4ea989e9-9007-5fe9-831a-9e152c649173')
+    })
 
-    test('invaild personNamespaceUuid', () => {
+    test('invalid personNamespaceUuid', () => {
         const classicPersonId = '1'
         const classicMandantId = '1234567'
         const personNamespaceUuid = 'invalid uuid'
 
-        const personId = new PersonId(
-            classicPersonId,
-            classicMandantId,
-            personNamespaceUuid
-        )
-
-        expect(personId.uuidV5).toThrowError(InvalidUuidError);
-    });
-});
+        expect(() => {
+            return new PersonId(
+                classicPersonId,
+                classicMandantId,
+                personNamespaceUuid
+            )
+        }).toThrowError(InvalidUuidError)
+    })
+})
