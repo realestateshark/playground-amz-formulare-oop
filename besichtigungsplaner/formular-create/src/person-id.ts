@@ -1,26 +1,26 @@
-import { v5, validate } from 'uuid';
-import { InvalidUuidError } from './invalid-uuid-exception';
+import { v5 } from 'uuid'
+import { UuidV4Interface } from './uuid-v4-interface'
+import { UuidV5 } from './uuid-v5'
+import { UuidV5Interface } from './uuid-v5-interface'
 
 export class PersonId {
-    private classicPersonId: string
-    private classicMandantId: string
-    private personNamespaceUuid: string
+    private classicPersonId: number
+    private classicMandantId: number
+    private personNamespace: UuidV4Interface
 
-    constructor(classicPersonId: string, classicMandantId: string, personNamespaceUuid: string) {
-
-        if (!validate(personNamespaceUuid)) {
-            throw new InvalidUuidError('invalid personNamespaceUuid parameter with ' + personNamespaceUuid)
-        }
+    constructor(classicPersonId: number, classicMandantId: number, personNamespace: UuidV4Interface) {
 
         this.classicPersonId = classicPersonId
         this.classicMandantId = classicMandantId
-        this.personNamespaceUuid = personNamespaceUuid
+        this.personNamespace = personNamespace
     }
 
-    get uuidV5() {
-        return v5(
-            this.classicMandantId + this.classicPersonId,
-            this.personNamespaceUuid
+    get uuidV5(): UuidV5Interface {
+        return new UuidV5(
+            v5(
+                `${this.classicMandantId}${this.classicPersonId}`,
+                this.personNamespace.string
+            )
         )
     }
 }

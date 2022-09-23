@@ -1,13 +1,13 @@
 import { validate, version } from 'uuid';
 import { InvalidUuidError } from './invalid-uuid-exception';
-import { UuidV4Interface } from './uuid-v4-interface';
+import { UuidV5Interface } from './uuid-v5-interface';
 
-export class UuidV4 implements UuidV4Interface {
+export class UuidV5 implements UuidV5Interface {
     id: string;
 
     constructor(id: string) {
-        if (!validate(id) || version(id) !== 4) {
-            throw new InvalidUuidError('invalid uuid v4 with "' + id + '"')
+        if (!validate(id) || version(id) !== 5) {
+            throw new InvalidUuidError('invalid uuid v5 with "' + id + '"')
         }
         this.id = id
     }
